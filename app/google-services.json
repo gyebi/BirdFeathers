@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "657214201287",
+    "project_id": "poultry-monitor-efda8",
+    "storage_bucket": "poultry-monitor-efda8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657214201287:android:546bc0c757619e98578de2",
+        "android_client_info": {
+          "package_name": "com.example.birdfeathers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657214201287-tomj7hr6nj495qkgg5tkigiememfh016.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5NLpQB7RGu92HGpD6cA7bL7t0ZkkSzNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657214201287-1rrt60vvanb10a0mbmceon9fomummvhd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
