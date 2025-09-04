@@ -109,6 +109,12 @@ dependencies {
     // Icons
     implementation("androidx.compose.material:material-icons-extended")
 
+    //graphs and charts
+    implementation("com.patrykandpatrick.vico:compose:1.13.0") // Vico is modern & Compose-native
+    implementation("com.patrykandpatrick.vico:core:1.13.0")
+    //implementation("com.himanshoe:charts:1.0.1")
+
+
     // Tests
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -54,6 +54,7 @@ class EggCollectionViewModel (
 
 
 
+
 class EggCollectionViewModelFactory(
     private val repository: EggRepository)
     : ViewModelProvider.Factory {

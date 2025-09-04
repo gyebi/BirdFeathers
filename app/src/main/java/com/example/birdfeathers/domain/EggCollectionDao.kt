@@ -3,6 +3,7 @@ package com.example.birdfeathers.domain
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.birdfeathers.data.EggStatsEntry
 import com.example.birdfeathers.entity.EggCollectionEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -12,7 +13,8 @@ interface EggCollectionDao {
     @Query("SELECT * FROM egg_collection WHERE date = :date")
     suspend fun getEggCollectionsByDate(date: String): List<EggCollectionEntity>
 
-    @Query("SELECT * FROM egg_collection ORDER by date Desc")
+    // query data used to populate chart table
+    @Query("SELECT * FROM egg_collection ORDER by date Asc")
     fun getAllEggCollections(): Flow<List<EggCollectionEntity>>
 
     @Insert
@@ -67,4 +69,15 @@ interface EggCollectionDao {
         WHERE date = :date AND timeOfDay = 'Evening'
     """)
     suspend fun getEveningTotal(date: String): Int
+
+    //eggs collected between a period of time
+    @Query("""
+    SELECT date AS date, SUM(eggCount) AS eggCount, 
+    90.0 as targetLay
+    FROM egg_collection
+    WHERE date BETWEEN :start AND :end
+    GROUP BY date
+    ORDER BY date
+""")
+    suspend fun getEggStatsBetweenDates(start: String, end: String): List<EggStatsEntry>
 }

@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             BirdFeathersTheme {
                 AppNavigation()
-                //DatabaseVerifyScreen(navController = NavHostController(LocalContext.current))
 
                 }
             }

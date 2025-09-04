@@ -23,6 +23,8 @@ sealed class Screen(val route: String) {
     object FeedCalculationHome : Screen("feed_calculation_home")
     object FeedCalculatorKg : Screen("calc_feed_cost_kg")
     object FeedCalculatorBags : Screen("calc_feed_cost_bags")
+    object EggAnalyticsScreen : Screen("egg_analytics_screen")
+    object ProjectionsBroilers : Screen("cost_projections_broilers_screen")
 
 
 

@@ -1,74 +1,111 @@
 package com.example.birdfeathers.ui
 
-import androidx.compose.foundation.background
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FinancialsHome(navController: NavHostController){
+fun FinancialsHome(navController: NavHostController) {
 
-                val context = LocalContext.current
+    val context = LocalContext.current
+    Scaffold(
+        containerColor = Color.White, // 👈 Scaffold background
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Back ",
+                        color = Color.Black // 👈 Title text color
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Color(0xFF10B981)
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.White // 👈 TopBar background
+                )
+            )
+        }
+    )
+    { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        )
+        {
+            Spacer(modifier = Modifier.height(100.dp))
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth(0.85f)
-                            .padding(24.dp)
+            // Logo placeholder
+
+            Text(
+                "Financials - Money Aspects of Poultry",
+                fontWeight = FontWeight.Bold, fontSize = 26.sp
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Log.d("NAVIGATION", "Navigating to cost_projections_broilers_screen")
+
+            Button(onClick = { navController.navigate("cost_projections_broilers_screen") },
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(32.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(32.dp)
-                        ) {
-                            Text(
-                                text = "Financials",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.primary
-                            )
+                        Text("Broiler Projections")
+                    }
+            Spacer(modifier = Modifier.height(24.dp))
 
-                            Button(
-                                onClick = {navController.navigate("financials") },
-                                modifier = Modifier.fillMaxWidth()
-                            ){
-                                Text("Broiler Projections")
-                            }
-                            Button(
-                                onClick ={ navController.navigate("feed_stock") },
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text("Layer Projections")
-                            }
-                            Button(
-                                onClick = { "" },
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text("View Excel Projections Sheet")
-                            }
-                        }
+            Button(
+                        onClick = { navController.navigate("feed_stock") },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Layer Projections")
+                    }
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Button(
+                        onClick = { "" },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("View Excel Projections Sheet")
                     }
                 }
+
             }
+        }
+
+
 
 
 /*

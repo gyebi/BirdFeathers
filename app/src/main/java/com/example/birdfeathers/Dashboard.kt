@@ -1,6 +1,7 @@
 package com.example.birdfeathers
 
 import MinimalFlockAlertCard
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -47,7 +48,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.birdfeathers.navigation.BottomNavBar
+import com.example.birdfeathers.ui.EggStatsLineChart
 import com.example.birdfeathers.viewmodel.EggCollectionViewModel
+import com.example.birdfeathers.viewmodel.EggStatsViewModel
 import com.example.birdfeathers.viewmodel.FlockArrivalViewModel
 import com.example.birdfeathers.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -61,11 +64,14 @@ fun Dashboard(
     navController: NavHostController,
     viewModel: UserViewModel,
     eggCollectionViewModel: EggCollectionViewModel,
-    flockArrivalViewModel: FlockArrivalViewModel
+    flockArrivalViewModel: FlockArrivalViewModel,
+    eggStatsViewModel: EggStatsViewModel, // 👈 Make sure you pass this in!
+
 ) {
 
     val currentUser = viewModel.currentUser.collectAsState()
     val scrollState = rememberScrollState()
+    val chartData by eggStatsViewModel.chartData.collectAsState()
 
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -113,7 +119,7 @@ fun Dashboard(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    AnalyticsCard()
+                    AnalyticsCard(eggStatsViewModel)
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -235,7 +241,11 @@ fun Dashboard(
 
 
                 @Composable
-                fun AnalyticsCard() {
+                fun AnalyticsCard(eggStatsViewModel: EggStatsViewModel) {
+
+                    val chartData by eggStatsViewModel.chartData.collectAsState()
+                    Log.d("EggStatsDebug", "Chart Data: $chartData")
+
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -260,12 +270,7 @@ fun Dashboard(
                                 color = Color.Black
                             )
 
-                            Icon(
-                                painter = painterResource(id = R.drawable.data_analytics_1),
-                                contentDescription = "Analytics",
-                                tint = Color.Gray,
-                                modifier = Modifier.fillMaxWidth()
-                            )
+                            EggStatsLineChart(chartData)
                         }
                     }
                 }
